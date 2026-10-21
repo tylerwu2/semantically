@@ -37,7 +37,7 @@ export default function UploadPage() {
       if (res.ok) {
         setStatus(data.status || 'Upload successful');
       } else {
-        setStatus(data.error || 'Upload failed');
+        setStatus(data.detail || data.error || 'Upload failed');
       }
     } catch (error) {
       console.error(error);

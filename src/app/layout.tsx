@@ -2,7 +2,7 @@ import './globals.css';
 import Link from 'next/link';
 
 export const metadata = {
-  title: 'Document Search Tool',
+  title: 'Semantically',
   description: 'Upload documents and ask questions for summaries',
 };
 

@@ -14,17 +14,14 @@ export default function ResultsPage() {
     setError('');
     setResults([]);
 
-    try {
-      // Create AbortController for timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 5 * 60 * 1000);
 
+    try {
       const res = await fetch(
         `http://localhost:8000/response?query=${encodeURIComponent(query)}`,
         { signal: controller.signal }
       );
-
-      clearTimeout(timeoutId);
 
       if (!res.ok) {
         let errData;
@@ -44,12 +41,13 @@ export default function ResultsPage() {
       setResults(data.results || []);
     } catch (err: any) {
       console.error(err); 
-      if (err.name === 'AbortError') {
-        setError('Request timed out. The model may be taking too long to respond.');
+      if (controller.signal.aborted) {
+        setError('Request timed out after 5 minutes. The model may still be generating; check the backend logs.');
       } else {
         setError((err as Error).message);
       }
     } finally {
+      window.clearTimeout(timeoutId);
       setLoading(false);
     }
   };
@@ -76,7 +74,7 @@ export default function ResultsPage() {
       </div>
 
       <div className="mt-4 w-full max-w-xl">
-        {loading && <p>Generating response... (this may take 10-30 seconds)</p>}
+        {loading && <p>Generating response... This can take a few minutes.</p>}
         {error && <p className="text-red-500">Error: {error}</p>}
         
         {results.length > 0 && (
