@@ -41,6 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # venv 
+venv
 /backend/venv
 
 # credentials
@@ -51,3 +52,5 @@ next-env.d.ts
 
 # chromadb vector database
 /backend/chroma_db
+
+bash.exe.stackdump

@@ -1,9 +1,6 @@
 fastapi[all]         
 uvicorn[standard]    
-langchain                
-sqlalchemy           
-transformers        
-torch                
+langchain                                     
 python-dotenv
 sentence-transformers
 pdfplumber
@@ -11,3 +8,4 @@ pypdf
 langchain-huggingface
 langchain-community
 langchain-chroma
+greenlet==3.2.4
