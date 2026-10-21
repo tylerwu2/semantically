@@ -7,6 +7,7 @@ torch
 python-dotenv
 sentence-transformers
 pdfplumber
+pypdf
 langchain-huggingface
 langchain-community
 langchain-chroma
